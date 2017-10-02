@@ -21,10 +21,8 @@ LOCALEDIR= $(PREFIX)/share/locale
 DFLAGS   =
 OFLAGS   = -O2
 AOFLAGS  = -O3
-STROKEFLAGS  = -Wall -std=c11 $(DFLAGS)
-CXXSTD = -std=c++11
 INCLUDES = $(shell pkg-config gtkmm-3.0 dbus-glib-1 --cflags)
-CXXFLAGS = $(CXXSTD) -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES)
+CXXFLAGS = $(CXXSTD) -std=c++11 -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES)
 CFLAGS   = -std=c11 -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES) -DGETTEXT_PACKAGE='"easystroke"'
 LDFLAGS  = $(DFLAGS)
 
@@ -65,7 +63,7 @@ $(BINARY): $(OFILES)
 	$(CXX) $(LDFLAGS) -o $@ $(OFILES) $(LIBS)
 
 stroke.o: stroke.c
-	$(CC) $(STROKEFLAGS) $(AOFLAGS) -MT $@ -MMD -MP -MF $*.Po -o $@ -c $<
+	$(CC) $(CFLAGS) $(AOFLAGS) -MT $@ -MMD -MP -MF $*.Po -o $@ -c $<
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(OFLAGS) -MT $@ -MMD -MP -MF $*.Po -o $@ -c $<

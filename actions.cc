@@ -51,10 +51,9 @@ void TreeViewMulti::on_drag_begin(const Glib::RefPtr<Gdk::DragContext> &context)
 	context->set_icon(pb, pb->get_width(), pb->get_height());
 }
 
-bool negate(bool b) { return !b; }
-
 TreeViewMulti::TreeViewMulti() : Gtk::TreeView(), pending(false) {
-	get_selection()->set_select_function(sigc::group(&negate, sigc::ref(pending)));
+    get_selection()->set_select_function(sigc::mem_fun(*this, &TreeViewMulti::negate_pending));
+
 }
 
 enum Type { COMMAND, KEY, TEXT, SCROLL, IGNORE, BUTTON, MISC };
@@ -681,7 +680,7 @@ void Actions::update_action_list() {
 void Actions::update_row(const Gtk::TreeRow &row) {
 	bool deleted, stroke, name, action;
 	RStrokeInfo si = action_list->get_info(row[cols.id], &deleted, &stroke, &name, &action);
-	row[cols.stroke] = !si->strokes.empty() && *si->strokes.begin() ? 
+	row[cols.stroke] = !si->strokes.empty() && *si->strokes.begin() ?
 		(*si->strokes.begin())->draw(STROKE_SIZE, stroke ? 4.0 : 2.0) : Stroke::drawEmpty(STROKE_SIZE);
 	row[cols.name] = si->name;
 	row[cols.type] = si->action ? type_info_to_name(&typeid(*si->action)) : "";
