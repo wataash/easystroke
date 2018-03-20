@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="easystroke" TARGET_NAME="easystroke" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/easystroke">
+    <envs />
+    <method />
+  </configuration>
+</component>

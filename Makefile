@@ -19,11 +19,11 @@ ICONDIR  = $(PREFIX)/share/icons/hicolor/scalable/apps
 MENUDIR  = $(PREFIX)/share/applications
 LOCALEDIR= $(PREFIX)/share/locale
 DFLAGS   =
-OFLAGS   = -O2
-AOFLAGS  = -O3
+OFLAGS   = -O0
+AOFLAGS  = -O0
 INCLUDES = $(shell pkg-config gtkmm-3.0 dbus-glib-1 --cflags)
-CXXFLAGS = $(CXXSTD) -std=c++11 -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES)
-CFLAGS   = -std=c11 -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES) -DGETTEXT_PACKAGE='"easystroke"'
+CXXFLAGS = $(CXXSTD) -std=c++11 -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES) -ggdb3
+CFLAGS   = -std=c11 -Wall $(DFLAGS) -DLOCALEDIR=\"$(LOCALEDIR)\" $(INCLUDES) -DGETTEXT_PACKAGE='"easystroke"' -ggdb3
 LDFLAGS  = $(DFLAGS)
 
 LIBS     = $(DFLAGS) -lboost_serialization -lX11 -lXext -lXi -lXfixes -lXtst `pkg-config gtkmm-3.0 dbus-glib-1 --libs`
